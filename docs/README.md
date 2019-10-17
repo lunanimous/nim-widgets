@@ -9,7 +9,7 @@ To start using nim-widgets, you need to include a script tag in the head of your
 ```html
 <head>
   <!-- ... -->
-  <script src="tbd"></script>
+  <script src="//cdn.jsdelivr.net/npm/nim-widgets/dist/nim-widgets.js"></script>
   <!-- ... -->
 </head>
 ```
@@ -22,8 +22,6 @@ The `nim-checkout` component provides a simple one click pay button for Nimiq. T
 
 ## Example
 
-For example at the bottom of your checkout page, you could have the following code to display the `nim-checkout` button.
-
 <div>
 <nim-checkout
 app="My shop"
@@ -32,6 +30,8 @@ value="1000"
 network="test"
 ></nim-checkout>
 </div>
+
+This example button could be used at the bottom of your checkout page, to display the `nim-checkout` button you need to have the following code on your page.
 
 ```html
 <nim-checkout
