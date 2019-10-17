@@ -39,7 +39,12 @@ export class Checkout {
   @State() inProgress: boolean = false;
 
   /**
-   * The network you want to use. Can be 'main' or 'test'
+   * The theme of the button. Use light when using against dark background.
+   */
+  @Prop() theme: 'dark' | 'light' = 'dark';
+
+  /**
+   * The network you want to use. Can be 'main' or 'test'.
    */
   @Prop() network: 'main' | 'test' = 'main';
 
@@ -54,7 +59,7 @@ export class Checkout {
   @Prop() recipient: string;
 
   /**
-   * Value of the transaction, in Luna. 1 NIM = 100000 Luna
+   * Value of the transaction, in Luna. 1 NIM = 100000 Luna.
    */
   @Prop() value: number;
 
@@ -76,12 +81,12 @@ export class Checkout {
   /**
    * Emitted when checkout is successful
    */
-  @Event() nimCheckout: EventEmitter;
+  @Event() nimCheckoutSuccess: EventEmitter;
 
   /**
    * Emitted when an error happened during checkout or it is canceled
    */
-  @Event() nimError: EventEmitter;
+  @Event() nimCheckoutError: EventEmitter;
 
   async checkout() {
     this.inProgress = true;
@@ -108,10 +113,10 @@ export class Checkout {
 
     try {
       const transaction: SignedTransaction = await hubApi.checkout(options);
-      this.nimCheckout.emit(transaction);
+      this.nimCheckoutSuccess.emit(transaction);
       this.inProgress = false;
     } catch (error) {
-      this.nimError.emit(error);
+      this.nimCheckoutError.emit(error);
       this.inProgress = false;
     }
   }
@@ -146,7 +151,7 @@ export class Checkout {
 
   render() {
     return (
-      <button type="button" onClick={_ => this.checkout()}>
+      <button class={'nim-theme-' + this.theme} type="button" onClick={_ => this.checkout()}>
         {this.renderLogo(true)}
         <div>
           {this.inProgress ? (

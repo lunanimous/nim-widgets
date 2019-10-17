@@ -9,6 +9,10 @@
     <script nomodule src="/build/nim-widgets.js"></script>
 
     <style>
+      body {
+        background-color: white;
+      }
+
       .container {
         position: absolute;
         top: 0;
@@ -16,19 +20,50 @@
         bottom: 0;
         left: 0;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
+      }
+
+      .demo {
+        padding: 24px;
+        margin: 6px;
+      }
+
+      .demo-dark {
+        background-color: #212431;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <nim-checkout
-        app="My shop"
-        recipient="NQ19 97P8 BRJY YY4X E5AM TG5J 45HM 7PX0 6H37"
-        value="1000"
-        network="test"
-      ></nim-checkout>
+      <div class="demo">
+        <nim-checkout
+          app="My shop"
+          recipient="NQ19 97P8 BRJY YY4X E5AM TG5J 45HM 7PX0 6H37"
+          value="1000"
+          network="test"
+        ></nim-checkout>
+      </div>
+      <div class="demo">
+        <nim-checkout
+          theme="light"
+          app="My shop"
+          recipient="NQ19 97P8 BRJY YY4X E5AM TG5J 45HM 7PX0 6H37"
+          value="1000"
+          network="test"
+        ></nim-checkout>
+      </div>
     </div>
+
+    <script>
+      document.addEventListener('nimCheckoutSuccess', function(transaction) {
+        console.log(transaction);
+      });
+
+      document.addEventListener('nimCheckoutError', function(error) {
+        console.log(error);
+      });
+    </script>
   </body>
 </html>

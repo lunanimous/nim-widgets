@@ -42,7 +42,7 @@ export namespace Components {
     */
     'logoUrl': string;
     /**
-    * The network you want to use. Can be 'main' or 'test'
+    * The network you want to use. Can be 'main' or 'test'.
     */
     'network': 'main' | 'test';
     /**
@@ -50,7 +50,11 @@ export namespace Components {
     */
     'recipient': string;
     /**
-    * Value of the transaction, in Luna. 1 NIM = 100000 Luna
+    * The theme of the button. Use light when using against dark background.
+    */
+    'theme': 'dark' | 'light';
+    /**
+    * Value of the transaction, in Luna. 1 NIM = 100000 Luna.
     */
     'value': number;
   }
@@ -109,23 +113,27 @@ declare namespace LocalJSX {
     */
     'logoUrl'?: string;
     /**
-    * The network you want to use. Can be 'main' or 'test'
+    * The network you want to use. Can be 'main' or 'test'.
     */
     'network'?: 'main' | 'test';
     /**
-    * Emitted when checkout is successful
-    */
-    'onNimCheckout'?: (event: CustomEvent<any>) => void;
-    /**
     * Emitted when an error happened during checkout or it is canceled
     */
-    'onNimError'?: (event: CustomEvent<any>) => void;
+    'onNimCheckoutError'?: (event: CustomEvent<any>) => void;
+    /**
+    * Emitted when checkout is successful
+    */
+    'onNimCheckoutSuccess'?: (event: CustomEvent<any>) => void;
     /**
     * The human-readable address of the recipient (your shop/app).
     */
     'recipient'?: string;
     /**
-    * Value of the transaction, in Luna. 1 NIM = 100000 Luna
+    * The theme of the button. Use light when using against dark background.
+    */
+    'theme'?: 'dark' | 'light';
+    /**
+    * Value of the transaction, in Luna. 1 NIM = 100000 Luna.
     */
     'value'?: number;
   }
