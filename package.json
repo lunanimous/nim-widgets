@@ -21,7 +21,7 @@
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
     "docs": "docsify serve ./docs",
-    "release": "np"
+    "release": "npm run build && np"
   },
   "devDependencies": {
     "@stencil/core": "^1.7.2",
