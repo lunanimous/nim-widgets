@@ -10,20 +10,6 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface MyComponent {
-    /**
-    * The first name
-    */
-    'first': string;
-    /**
-    * The last name
-    */
-    'last': string;
-    /**
-    * The middle name
-    */
-    'middle': string;
-  }
   interface NimCheckout {
     /**
     * The name of your app, should be as short as possible.
@@ -63,38 +49,17 @@ export namespace Components {
 declare global {
 
 
-  interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
-  const HTMLMyComponentElement: {
-    prototype: HTMLMyComponentElement;
-    new (): HTMLMyComponentElement;
-  };
-
   interface HTMLNimCheckoutElement extends Components.NimCheckout, HTMLStencilElement {}
   const HTMLNimCheckoutElement: {
     prototype: HTMLNimCheckoutElement;
     new (): HTMLNimCheckoutElement;
   };
   interface HTMLElementTagNameMap {
-    'my-component': HTMLMyComponentElement;
     'nim-checkout': HTMLNimCheckoutElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface MyComponent {
-    /**
-    * The first name
-    */
-    'first'?: string;
-    /**
-    * The last name
-    */
-    'last'?: string;
-    /**
-    * The middle name
-    */
-    'middle'?: string;
-  }
   interface NimCheckout {
     /**
     * The name of your app, should be as short as possible.
@@ -139,7 +104,6 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
-    'my-component': MyComponent;
     'nim-checkout': NimCheckout;
   }
 }
@@ -150,7 +114,6 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
-      'my-component': LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
       'nim-checkout': LocalJSX.NimCheckout & JSXBase.HTMLAttributes<HTMLNimCheckoutElement>;
     }
   }
