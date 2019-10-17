@@ -1,7 +1,7 @@
 {
   "name": "nim-widgets",
   "version": "0.0.1",
-  "description": "Stencil Component Starter",
+  "description": "Collection of helpful UI components to interact with the Nimiq blockchain",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "es2015": "dist/esm/index.mjs",
@@ -19,10 +19,31 @@
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
-    "generate": "stencil generate"
+    "generate": "stencil generate",
+    "docs": "docsify serve ./docs",
+    "release": "np"
   },
   "devDependencies": {
-    "@stencil/core": "^1.3.3"
+    "@stencil/core": "^1.7.2",
+    "@types/jest": "24.0.19",
+    "@types/puppeteer": "1.19.0",
+    "jest": "24.8.0",
+    "jest-cli": "24.8.0",
+    "np": "^5.1.1",
+    "puppeteer": "1.19.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@nimiq/hub-api": "^1.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lunanimous/nim-widgets.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lunanimous/nim-widgets/issues"
+  },
+  "np": {
+    "yarn": false
+  }
 }
