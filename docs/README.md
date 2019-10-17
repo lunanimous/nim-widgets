@@ -1,15 +1,15 @@
-# Nim Widgets
+# Overview
 
 The Nim Widgets are a collection of helpful UI components to interact with the [Nimiq blockchain](https://nimiq.com). The goal is to provide the lowest barrier of entry for people to use Nimiq on their website.
 
-## Components
+# List
 
 This is the list of components that are part of the nim-widgets. Feel free to suggest any new component in a Github issue.
 
 - [x] nim-checkout: accept payment with nimiq
 - [ ] nim-donate: accept donation with nimiq
 
-## Usage
+# Usage
 
 To start using nim-widgets, you need to include a script tag in the head of your HTML page.
 
@@ -23,13 +23,22 @@ To start using nim-widgets, you need to include a script tag in the head of your
 
 Once you have that included, you are ready to use nim-widgets on your page, just include the corresponding tags.
 
-## nim-checkout
+# nim-checkout
 
 The `nim-checkout` component provides a simple one click pay button for Nimiq. This is inspired by the Paypal button. Once the user clicks the button, he will be taken to the Nimiq Hub to complete the transaction.
 
-### Example
+## Example
 
 For example at the bottom of your checkout page, you could have the following code to display the `nim-checkout` button.
+
+<div>
+<nim-checkout
+app="My shop"
+recipient="NQ19 97P8 BRJY YY4X E5AM TG5J 45HM 7PX0 6H37"
+value="1000"
+network="test"
+></nim-checkout>
+</div>
 
 ```html
 <nim-checkout
@@ -56,7 +65,7 @@ document.addEventListener('nimCheckoutError', function(event) {
 });
 ```
 
-### Properties
+## Properties
 
 | Property    | Attribute   | Description                                                                                                     | Type                | Default     |
 | ----------- | ----------- | --------------------------------------------------------------------------------------------------------------- | ------------------- | ----------- |
@@ -69,11 +78,9 @@ document.addEventListener('nimCheckoutError', function(event) {
 | `theme`     | `theme`     | The theme of the button. Use light when using against dark background.                                          | `"dark" \| "light"` | `'dark'`    |
 | `value`     | `value`     | Value of the transaction, in Luna. 1 NIM = 100000 Luna.                                                         | `number`            | `undefined` |
 
-### Events
+## Events
 
 | Event                | Description                                                      | Type               |
 | -------------------- | ---------------------------------------------------------------- | ------------------ |
 | `nimCheckoutError`   | Emitted when an error happened during checkout or it is canceled | `CustomEvent<any>` |
 | `nimCheckoutSuccess` | Emitted when checkout is successful                              | `CustomEvent<any>` |
-
-##
