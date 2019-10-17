@@ -44,6 +44,7 @@
     "url": "https://github.com/lunanimous/nim-widgets/issues"
   },
   "np": {
-    "yarn": false
+    "yarn": false,
+    "cleanup": false
   }
 }
