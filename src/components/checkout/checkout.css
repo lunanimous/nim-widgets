@@ -1,35 +1,178 @@
+:host {
+  display: block;
+  --nimiq-blue: #1f2348;
+  --nimiq-light-blue: #0582ca;
+  --nimiq-gold: #e9b213;
+  --nimiq-green: #21bca5;
+  --nimiq-orange: #fc8702;
+  --nimiq-red: #d94432;
+  --nimiq-gray: #e2e8f0;
+  --nimiq-light-gray: #edf2f7;
+  --nimiq-blue-darkened: #151833;
+  --nimiq-light-blue-darkened: #0071c3;
+  --nimiq-gold-darkened: #e5a212;
+  --nimiq-green-darkened: #20b29e;
+  --nimiq-orange-darkened: #fc7500;
+  --nimiq-red-darkened: #d13030;
+  --nimiq-blue-bg: radial-gradient(ellipse at bottom right, #260133, var(--nimiq-blue));
+  --nimiq-light-blue-bg: radial-gradient(ellipse at bottom right, #265dd7, var(--nimiq-light-blue));
+  --nimiq-gold-bg: radial-gradient(ellipse at bottom right, #ec991c, var(--nimiq-gold));
+  --nimiq-green-bg: radial-gradient(ellipse at bottom right, #41a38e, var(--nimiq-green));
+  --nimiq-orange-bg: radial-gradient(ellipse at bottom right, #fd6216, var(--nimiq-orange));
+  --nimiq-red-bg: radial-gradient(ellipse at bottom right, #cc3047, var(--nimiq-red));
+  --nimiq-blue-bg-darkened: radial-gradient(ellipse at bottom right, #180021, var(--nimiq-blue-darkened));
+  --nimiq-light-blue-bg-darkened: radial-gradient(ellipse at bottom right, #2355c4, var(--nimiq-light-blue-darkened));
+  --nimiq-gold-bg-darkened: radial-gradient(ellipse at bottom right, #e58a1b, var(--nimiq-gold-darkened));
+  --nimiq-green-bg-darkened: radial-gradient(ellipse at bottom right, #3d9988, var(--nimiq-green-darkened));
+  --nimiq-orange-bg-darkened: radial-gradient(ellipse at bottom right, #ea5200, var(--nimiq-orange-darkened));
+  --nimiq-red-bg-darkened: radial-gradient(ellipse at bottom right, #bf2d46, var(--nimiq-red-darkened));
+}
+
 button {
-  background-color: #f1f1f4;
-  color: #1f2348;
-  border-radius: 4px;
+  border-radius: 100px;
   border: 0 none;
-  padding: 8px 32px;
+  padding: 12px 20px;
   margin: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
   font-size: 16px;
-  transition: color 300ms, background-color 300ms;
-}
-
-button:hover {
-  color: #151833;
-  background-color: #e4e4e9;
   cursor: pointer;
+  transition: color 300ms cubic-bezier(0.25, 0, 0, 1), background-color 300ms cubic-bezier(0.25, 0, 0, 1),
+    transform 300ms cubic-bezier(0.25, 0, 0, 1);
 }
 
-button.nim-theme-dark {
-  color: white;
-  background-color: #1f2348;
+button:focus:not([disabled]) {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
 }
 
-button.nim-theme-dark:hover {
-  color: white;
-  background-color: #151833;
+button:hover:not([disabled]) {
+  transform: translateY(-2px);
+}
+
+button[disabled] {
+  background: var(--nimiq-gray);
+  color: var(--nimiq-blue);
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+button[disabled]:hover {
+  background: var(--nimiq-gray);
+  color: var(--nimiq-blue);
+}
+
+button[disabled] > nim-icon {
+  color: var(--nimiq-blue);
 }
 
 .nim-logo {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   margin-right: 8px;
+}
+
+/* Neutral theme */
+.nim-theme-neutral {
+  color: var(--nimiq-blue);
+  background-color: var(--nimiq-light-gray);
+}
+
+.nim-theme-neutral:hover {
+  background-color: var(--nimiq-gray);
+}
+
+.nim-theme-neutral > nim-icon {
+  color: #e9b213;
+}
+
+/* Blue theme */
+.nim-theme-blue {
+  color: #ffffff;
+  background-image: var(--nimiq-blue-bg);
+}
+
+.nim-theme-blue:hover {
+  color: #ffffff;
+  background-image: var(--nimiq-blue-bg-darkened);
+}
+
+.nim-theme-blue > nim-icon {
+  color: var(--nimiq-gold);
+}
+
+/* Gold theme */
+.nim-theme-gold {
+  color: #ffffff;
+  background-image: var(--nimiq-gold-bg);
+}
+
+.nim-theme-gold:hover {
+  color: #ffffff;
+  background-image: var(--nimiq-gold-bg-darkened);
+}
+
+.nim-theme-gold > nim-icon {
+  color: #ffffff;
+}
+
+/* Light blue theme */
+.nim-theme-light-blue {
+  color: #ffffff;
+  background-image: var(--nimiq-light-blue-bg);
+}
+
+.nim-theme-light-blue:hover {
+  color: #ffffff;
+  background-image: var(--nimiq-light-blue-bg-darkened);
+}
+
+.nim-theme-light-blue > nim-icon {
+  color: #ffffff;
+}
+
+/* Green theme */
+.nim-theme-green {
+  color: #ffffff;
+  background-image: var(--nimiq-green-bg);
+}
+
+.nim-theme-green:hover {
+  color: #ffffff;
+  background-image: var(--nimiq-green-bg-darkened);
+}
+
+.nim-theme-green > nim-icon {
+  color: #ffffff;
+}
+
+/* Orange theme */
+.nim-theme-orange {
+  color: #ffffff;
+  background-image: var(--nimiq-orange-bg);
+}
+
+.nim-theme-orange:hover {
+  color: #ffffff;
+  background-image: var(--nimiq-orange-bg-darkened);
+}
+
+.nim-theme-orange > nim-icon {
+  color: #ffffff;
+}
+
+/* Red theme */
+.nim-theme-red {
+  color: #ffffff;
+  background-image: var(--nimiq-red-bg);
+}
+
+.nim-theme-red:hover {
+  color: #ffffff;
+  background-image: var(--nimiq-red-bg-darkened);
+}
+
+.nim-theme-red > nim-icon {
+  color: #ffffff;
 }
