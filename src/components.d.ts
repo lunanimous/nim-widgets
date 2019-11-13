@@ -36,6 +36,10 @@ export namespace Components {
     */
     'recipient': string;
     /**
+    * The text to display on the button. Defaut: "Pay with NIM"
+    */
+    'text': string;
+    /**
     * The theme of the button. Use light when using against dark background.
     */
     'theme': 'neutral' | 'blue' | 'gold' | 'light-blue' | 'green' | 'orange' | 'red';
@@ -103,6 +107,10 @@ declare namespace LocalJSX {
     * The human-readable address of the recipient (your shop/app).
     */
     'recipient'?: string;
+    /**
+    * The text to display on the button. Defaut: "Pay with NIM"
+    */
+    'text'?: string;
     /**
     * The theme of the button. Use light when using against dark background.
     */

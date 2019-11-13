@@ -79,6 +79,11 @@ export class Checkout {
   @Prop() data: string;
 
   /**
+   * The text to display on the button. Defaut: "Pay with NIM"
+   */
+  @Prop() text: string = 'Pay with NIM';
+
+  /**
    * Emitted when checkout is successful
    */
   @Event() nimCheckoutSuccess: EventEmitter;
@@ -125,15 +130,7 @@ export class Checkout {
     return (
       <button class={'nim-theme-' + this.theme} disabled={this.inProgress} type="button" onClick={_ => this.checkout()}>
         <nim-icon class="nim-logo" name="hexagon"></nim-icon>
-        <div>
-          {this.inProgress ? (
-            <span>In progress...</span>
-          ) : (
-            <span>
-              <strong>Nimiq</strong> Checkout
-            </span>
-          )}
-        </div>
+        <div>{this.inProgress ? <span>In progress...</span> : <span>{this.text}</span>}</div>
       </button>
     );
   }
