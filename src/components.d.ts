@@ -9,11 +9,9 @@
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
   Network,
+  SignedTransaction,
   Theme,
 } from './utils/common';
-import {
-  SignedTransaction,
-} from './components/checkout/checkout-interface';
 
 export namespace Components {
   interface NimCheckout {

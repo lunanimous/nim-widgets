@@ -203,7 +203,10 @@ button:focus:not([disabled]):after {
 
 /* Overlay styles */
 .overlay {
-  display: none;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  display: flex;
   position: fixed;
   top: 0;
   right: 0;
@@ -215,7 +218,8 @@ button:focus:not([disabled]):after {
 }
 
 .overlay.is-open {
-  display: flex;
+  width: 100%;
+  height: 100%;
 }
 
 .dialog {
@@ -226,13 +230,21 @@ button:focus:not([disabled]):after {
   background-color: #ffffff;
   box-shadow: 0 0.5rem 3.5rem rgba(0, 0, 0, 0.12);
   border-radius: 8px;
+  transform: translateY(24px);
+  opacity: 0;
+  transition: transform 400ms cubic-bezier(0.25, 0, 0, 1), opacity 400ms cubic-bezier(0.25, 0, 0, 1);
+}
+
+.overlay.is-open > .dialog {
+  transform: translateY(0px);
+  opacity: 1;
 }
 
 .dialog h2 {
   text-align: center;
   font-size: 24px;
   line-height: 1.2;
-  font-weight: bold;
+  font-weight: 600;
   padding: 32px;
   margin: 0;
 }
@@ -259,8 +271,10 @@ button:focus:not([disabled]):after {
 
 .recipient {
   display: flex;
-  padding-left: 24px;
-  padding-right: 24px;
+  margin-left: 24px;
+  margin-right: 24px;
+  padding-bottom: 24px;
+  border-bottom: solid 1px var(--nimiq-light-gray);
 }
 
 .recipient .identicon {
@@ -281,6 +295,7 @@ button:focus:not([disabled]):after {
   color: var(--nimiq-blue);
   opacity: 0.5;
   letter-spacing: 0.02em;
+  font-weight: 600;
 }
 
 .recipient .address > .chunk {
@@ -322,7 +337,6 @@ button:focus:not([disabled]):after {
   outline: 0;
   transition: color 0.2s ease, border 0.2s ease;
   background-clip: padding-box;
-  appearance: none;
 }
 
 .amount input:focus {
@@ -346,8 +360,8 @@ button:focus:not([disabled]):after {
 
 .message {
   margin-top: 24px;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: 32px;
+  padding-right: 32px;
 }
 
 .message input {
@@ -356,7 +370,7 @@ button:focus:not([disabled]):after {
   box-sizing: border-box;
   font-family: inherit;
   font-size: inherit;
-  padding: 12px;
+  padding: 12px 0;
   border: 0 none;
   border-bottom: solid 2px rgba(31, 35, 72, 0);
   color: var(--nimiq-blue);

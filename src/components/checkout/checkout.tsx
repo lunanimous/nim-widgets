@@ -1,12 +1,6 @@
 import { Component, h, Prop, Event, EventEmitter, State } from '@stencil/core';
 import HubApi from '@nimiq/hub-api';
-import { CheckoutOptions, SignedTransaction } from './checkout-interface';
-import { Theme, Network } from '../../utils/common';
-
-const HubUrl = {
-  main: 'https://hub.nimiq.com',
-  test: 'https://hub.nimiq-testnet.com',
-};
+import { Theme, Network, HubUrl, CheckoutOptions, SignedTransaction } from '../../utils/common';
 
 @Component({
   tag: 'nim-checkout',
