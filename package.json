@@ -34,7 +34,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@nimiq/hub-api": "^1.0.1"
+    "@nimiq/hub-api": "^1.0.1",
+    "@nimiq/style": "^0.7.6"
   },
   "repository": {
     "type": "git",

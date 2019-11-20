@@ -36,13 +36,20 @@ export namespace Components {
     */
     'recipient': string;
     /**
+    * The text to display on the button. Default: "Pay with NIM"
+    */
+    'text': string;
+    /**
     * The theme of the button. Use light when using against dark background.
     */
-    'theme': 'dark' | 'light';
+    'theme': 'neutral' | 'blue' | 'gold' | 'light-blue' | 'green' | 'orange' | 'red';
     /**
     * Value of the transaction, in Luna. 1 NIM = 100000 Luna.
     */
     'value': number;
+  }
+  interface NimIcon {
+    'name': string;
   }
 }
 
@@ -54,8 +61,15 @@ declare global {
     prototype: HTMLNimCheckoutElement;
     new (): HTMLNimCheckoutElement;
   };
+
+  interface HTMLNimIconElement extends Components.NimIcon, HTMLStencilElement {}
+  const HTMLNimIconElement: {
+    prototype: HTMLNimIconElement;
+    new (): HTMLNimIconElement;
+  };
   interface HTMLElementTagNameMap {
     'nim-checkout': HTMLNimCheckoutElement;
+    'nim-icon': HTMLNimIconElement;
   }
 }
 
@@ -94,17 +108,25 @@ declare namespace LocalJSX {
     */
     'recipient'?: string;
     /**
+    * The text to display on the button. Default: "Pay with NIM"
+    */
+    'text'?: string;
+    /**
     * The theme of the button. Use light when using against dark background.
     */
-    'theme'?: 'dark' | 'light';
+    'theme'?: 'neutral' | 'blue' | 'gold' | 'light-blue' | 'green' | 'orange' | 'red';
     /**
     * Value of the transaction, in Luna. 1 NIM = 100000 Luna.
     */
     'value'?: number;
   }
+  interface NimIcon {
+    'name'?: string;
+  }
 
   interface IntrinsicElements {
     'nim-checkout': NimCheckout;
+    'nim-icon': NimIcon;
   }
 }
 
@@ -115,6 +137,7 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       'nim-checkout': LocalJSX.NimCheckout & JSXBase.HTMLAttributes<HTMLNimCheckoutElement>;
+      'nim-icon': LocalJSX.NimIcon & JSXBase.HTMLAttributes<HTMLNimIconElement>;
     }
   }
 }
