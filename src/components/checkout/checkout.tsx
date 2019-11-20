@@ -79,7 +79,7 @@ export class Checkout {
   @Prop() data: string;
 
   /**
-   * The text to display on the button. Defaut: "Pay with NIM"
+   * The text to display on the button. Default: "Pay with NIM"
    */
   @Prop() text: string = 'Pay with NIM';
 

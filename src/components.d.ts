@@ -36,7 +36,7 @@ export namespace Components {
     */
     'recipient': string;
     /**
-    * The text to display on the button. Defaut: "Pay with NIM"
+    * The text to display on the button. Default: "Pay with NIM"
     */
     'text': string;
     /**
@@ -108,7 +108,7 @@ declare namespace LocalJSX {
     */
     'recipient'?: string;
     /**
-    * The text to display on the button. Defaut: "Pay with NIM"
+    * The text to display on the button. Default: "Pay with NIM"
     */
     'text'?: string;
     /**
