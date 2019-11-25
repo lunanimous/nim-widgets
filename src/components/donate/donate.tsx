@@ -3,6 +3,13 @@ import { Theme, Network, HubUrl, CheckoutOptions } from '../../utils/common';
 import Iqons from '@nimiq/iqons/dist/iqons.min.js';
 import HubApi from '@nimiq/hub-api';
 
+enum Status {
+  Idle = 0,
+  Progress = 1,
+  Success = 2,
+  Error = 3
+}
+
 @Component({
   tag: 'nim-donate',
   styleUrl: 'donate.css',
@@ -10,9 +17,7 @@ import HubApi from '@nimiq/hub-api';
   shadow: true,
 })
 export class Donate {
-  @State() inProgress: boolean = false;
-  @State() isSuccess: boolean = false;
-  @State() isError: boolean = false;
+  @State() status: Status = Status.Idle;
   @State() isOpen: boolean = false;
   @State() addressChunks: string[] = ['NQ05', 'EYDD', 'HLP3', 'J57S', 'P6YJ', 'JL0X', 'SJDK', 'RF9K', 'A9QV'];
   @State() identicon: string;
@@ -41,7 +46,8 @@ export class Donate {
   @Prop() recipient: string;
 
   /**
-   * An image URL. Must be on the same origin as the request is sent from. Should be square and at least 146x146 px.
+   * An image URL. Must be on the same origin as the request is sent from.
+   * Should be square and at least 146x146 px.
    */
   @Prop() logoUrl: string;
 
@@ -76,7 +82,7 @@ export class Donate {
   async donate(event) {
     event.preventDefault();
 
-    this.inProgress = true;
+    this.status = Status.Progress;
 
     let options: CheckoutOptions = {
       appName: this.text,
@@ -100,12 +106,17 @@ export class Donate {
 
     try {
       await hubApi.checkout(options);
-      this.isSuccess = true;
-      this.inProgress = false;
+      this.status = Status.Success;
+      setTimeout(() => {
+        this.status = Status.Idle;
+        this.close();
+      }, 3000)
       console.log('success');
     } catch (error) {
-      this.isError = true;
-      this.inProgress = false;
+      this.status = Status.Error;
+      setTimeout(() => {
+        this.status = Status.Idle;
+      }, 3000)
       console.log('error', error);
     }
   }
@@ -127,12 +138,12 @@ export class Donate {
       <div class="donate">
         <button
           class={'nim-button nim-theme-' + this.theme}
-          disabled={this.inProgress}
+          disabled={this.status === Status.Progress}
           type="button"
           onClick={_ => this.open()}
         >
           <nim-icon class="nim-logo" name="hexagon"></nim-icon>
-          <div>{this.inProgress ? <span>In progress...</span> : <span>{this.text}</span>}</div>
+          <div><span>{this.text}</span></div>
         </button>
         <div class={{ overlay: true, 'is-open': this.isOpen }}>
           <div class="dialog">
@@ -174,6 +185,24 @@ export class Donate {
                 </button>
               </div>
             </form>
+            <div class={{
+              'flash': true,
+              'show': this.status !== Status.Idle,
+            }}>
+              <p>Transaction in progress...</p>
+            </div>
+            <div class={{
+              'flash success': true,
+              'show': this.status === Status.Success,
+            }}>
+              <p>Thank you !</p>
+            </div>
+            <div class={{
+              'flash error': true,
+              'show': this.status === Status.Error,
+            }}>
+              <p>Transaction failed. Please try again.</p>
+            </div>
           </div>
         </div>
       </div>

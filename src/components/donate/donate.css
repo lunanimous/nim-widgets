@@ -240,6 +240,53 @@ button:focus:not([disabled]):after {
   opacity: 1;
 }
 
+.flash {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: var(--nimiq-blue-bg);
+  color: #ffffff;
+  border-radius: 4px;
+  margin: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 200;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.flash.show {
+  opacity: 1;
+  pointer-events: all;
+  transition: opacity 300ms cubic-bezier(0.25, 0, 0, 1);
+}
+
+.flash.error {
+  background-image: var(--nimiq-red-bg);
+}
+
+.flash.success {
+  background-image: var(--nimiq-green-bg)
+}
+
+.flash p {
+  font-size: 24px;
+  text-align: center;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.flash.show p {
+  padding: 24px;
+  opacity: 1;
+  transform: translateY(0px);
+  transition: opacity 300ms cubic-bezier(0.25, 0, 0, 1), transform 300ms 100ms cubic-bezier(0.25, 0, 0, 1);
+}
+
 .dialog h2 {
   text-align: center;
   font-size: 24px;
@@ -295,7 +342,6 @@ button:focus:not([disabled]):after {
   color: var(--nimiq-blue);
   opacity: 0.5;
   letter-spacing: 0.02em;
-  font-weight: 600;
 }
 
 .recipient .address > .chunk {
@@ -304,7 +350,7 @@ button:focus:not([disabled]):after {
 }
 
 .confirm {
-  margin-top: 12px;
+  margin-top: 16px;
   padding: 0 24px 24px;
 }
 
