@@ -1,34 +1,6 @@
 import { Component, h, Prop, Event, EventEmitter, State } from '@stencil/core';
 import HubApi from '@nimiq/hub-api';
-
-interface CheckoutOptions {
-  appName: string;
-  recipient: string;
-  value: number;
-  shopLogoUrl?: string;
-  fee?: number;
-  extraData?: Uint8Array | string;
-}
-
-interface SignedTransaction {
-  serializedTx: string; // HEX signed and serialized transaction
-  hash: string; // HEX transaction hash
-
-  raw: {
-    signerPublicKey: Uint8Array; // Serialized public key of the signer
-    signature: Uint8Array; // Serialized signature of the signer
-    sender: string; // Human-readable address of sender
-    recipient: string; // Human-readable address of recipient
-    value: number;
-    fee: number;
-    networkId: number;
-  };
-}
-
-const HubUrl = {
-  main: 'https://hub.nimiq.com',
-  test: 'https://hub.nimiq-testnet.com',
-};
+import { Theme, Network, HubUrl, CheckoutOptions, SignedTransaction } from '../../utils/common';
 
 @Component({
   tag: 'nim-checkout',
@@ -41,12 +13,12 @@ export class Checkout {
   /**
    * The theme of the button. Use light when using against dark background.
    */
-  @Prop() theme: 'neutral' | 'blue' | 'gold' | 'light-blue' | 'green' | 'orange' | 'red' = 'neutral';
+  @Prop() theme: Theme = 'neutral';
 
   /**
    * The network you want to use. Can be 'main' or 'test'.
    */
-  @Prop() network: 'main' | 'test' = 'main';
+  @Prop() network: Network = 'main';
 
   /**
    * The name of your app, should be as short as possible.
@@ -86,12 +58,12 @@ export class Checkout {
   /**
    * Emitted when checkout is successful
    */
-  @Event() nimCheckoutSuccess: EventEmitter;
+  @Event() nimCheckoutSuccess: EventEmitter<SignedTransaction>;
 
   /**
    * Emitted when an error happened during checkout or it is canceled
    */
-  @Event() nimCheckoutError: EventEmitter;
+  @Event() nimCheckoutError: EventEmitter<any>;
 
   async checkout() {
     this.inProgress = true;

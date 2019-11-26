@@ -3,14 +3,14 @@ import { Component, h, getAssetPath, Prop } from '@stencil/core';
 @Component({
   tag: 'nim-icon',
   styleUrl: 'icon.css',
-  assetsDir: 'assets',
+  assetsDir: 'icons',
   shadow: true,
 })
 export class Icon {
   @Prop() name: string = 'hexagon';
 
   get xlinkHref() {
-    return getAssetPath('./assets/nimiq-style.icons.svg') + `#nq-${this.name}`;
+    return getAssetPath('./icons/nimiq-style.icons.svg') + `#nq-${this.name}`;
   }
 
   render() {
