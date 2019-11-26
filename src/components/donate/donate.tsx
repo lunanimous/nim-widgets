@@ -1,4 +1,4 @@
-import { Component, h, State, Prop, getAssetPath } from '@stencil/core';
+import { Component, h, State, Prop, getAssetPath, Watch } from '@stencil/core';
 import { Theme, Network, HubUrl, CheckoutOptions } from '../../utils/common';
 import Iqons from '@nimiq/iqons/dist/iqons.min.js';
 import HubApi from '@nimiq/hub-api';
@@ -7,7 +7,7 @@ enum Status {
   Idle = 0,
   Progress = 1,
   Success = 2,
-  Error = 3
+  Error = 3,
 }
 
 @Component({
@@ -19,7 +19,7 @@ enum Status {
 export class Donate {
   @State() status: Status = Status.Idle;
   @State() isOpen: boolean = false;
-  @State() addressChunks: string[] = ['NQ05', 'EYDD', 'HLP3', 'J57S', 'P6YJ', 'JL0X', 'SJDK', 'RF9K', 'A9QV'];
+  @State() addressChunks: string[] = [];
   @State() identicon: string;
   /**
    * Amount of NIM to donate, bound to input field.
@@ -44,6 +44,11 @@ export class Donate {
    * The human-readable address of the recipient (your shop/app).
    */
   @Prop() recipient: string;
+  @Watch('recipient')
+  onRecipientChanged() {
+    this.breakAddressIntoChunks();
+    this.generateIdenticon();
+  }
 
   /**
    * An image URL. Must be on the same origin as the request is sent from.
@@ -62,11 +67,20 @@ export class Donate {
   @Prop() text: string = 'Donate NIM';
 
   componentWillLoad() {
-    const address = 'NQ05 EYDD HLP3 J57S P6YJ JL0X SJDK RF9K A9QV';
-
     Iqons.svgPath = getAssetPath('./identicons/iqons.min.svg');
 
-    Iqons.toDataUrl(address).then(identicon => {
+    this.breakAddressIntoChunks();
+    this.generateIdenticon();
+  }
+
+  breakAddressIntoChunks() {
+    const addressWithoutSpaces = this.recipient.replace(/\s/g, '');
+
+    this.addressChunks = addressWithoutSpaces.match(/.{1,4}/g);
+  }
+
+  generateIdenticon() {
+    Iqons.toDataUrl(this.recipient).then(identicon => {
       this.identicon = identicon;
     });
   }
@@ -110,14 +124,12 @@ export class Donate {
       setTimeout(() => {
         this.status = Status.Idle;
         this.close();
-      }, 3000)
-      console.log('success');
+      }, 3000);
     } catch (error) {
       this.status = Status.Error;
       setTimeout(() => {
         this.status = Status.Idle;
-      }, 3000)
-      console.log('error', error);
+      }, 2000);
     }
   }
 
@@ -143,7 +155,9 @@ export class Donate {
           onClick={_ => this.open()}
         >
           <nim-icon class="nim-logo" name="hexagon"></nim-icon>
-          <div><span>{this.text}</span></div>
+          <div>
+            <span>{this.text}</span>
+          </div>
         </button>
         <div class={{ overlay: true, 'is-open': this.isOpen }}>
           <div class="dialog">
@@ -185,22 +199,28 @@ export class Donate {
                 </button>
               </div>
             </form>
-            <div class={{
-              'flash': true,
-              'show': this.status !== Status.Idle,
-            }}>
+            <div
+              class={{
+                flash: true,
+                show: this.status !== Status.Idle,
+              }}
+            >
               <p>Transaction in progress...</p>
             </div>
-            <div class={{
-              'flash success': true,
-              'show': this.status === Status.Success,
-            }}>
+            <div
+              class={{
+                'flash success': true,
+                show: this.status === Status.Success,
+              }}
+            >
               <p>Thank you !</p>
             </div>
-            <div class={{
-              'flash error': true,
-              'show': this.status === Status.Error,
-            }}>
+            <div
+              class={{
+                'flash error': true,
+                show: this.status === Status.Error,
+              }}
+            >
               <p>Transaction failed. Please try again.</p>
             </div>
           </div>
