@@ -11,8 +11,11 @@ To start using nim-widgets, you need to include a script tag in the head of your
 ```html
 <head>
   <!-- ... -->
-  <script type="module" src="https://cdn.jsdelivr.net/npm/nim-widgets/dist/nim-widgets/nim-widgets.esm.js"></script>
-  <script nomodule="" src="https://cdn.jsdelivr.net/npm/nim-widgets/dist/nim-widgets/nim-widgets.js"></script>
+  <script
+    type="module"
+    src="https://cdn.jsdelivr.net/npm/nim-widgets@0.2.0/dist/nim-widgets/nim-widgets.esm.js"
+  ></script>
+  <script nomodule="" src="https://cdn.jsdelivr.net/npm/nim-widgets@0.2.0/dist/nim-widgets/nim-widgets.js"></script>
   <!-- ... -->
 </head>
 ```
