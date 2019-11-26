@@ -2,6 +2,8 @@
 
 The Nim Widgets are a collection of helpful UI components to interact with the [Nimiq blockchain](https://nimiq.com). The goal is to provide the lowest barrier of entry for people to use Nimiq on their website.
 
+> DO NOT USE IN PRODUCTION YET. THIS IS STILL IN PRE-RELEASE STATUS.
+
 # Usage
 
 To start using nim-widgets, you need to include a script tag in the head of your HTML page.
@@ -9,7 +11,8 @@ To start using nim-widgets, you need to include a script tag in the head of your
 ```html
 <head>
   <!-- ... -->
-  <script src="//cdn.jsdelivr.net/npm/nim-widgets/dist/nim-widgets.js"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/nim-widgets/dist/nim-widgets/nim-widgets.esm.js"></script>
+  <script nomodule="" src="https://cdn.jsdelivr.net/npm/nim-widgets/dist/nim-widgets/nim-widgets.js"></script>
   <!-- ... -->
 </head>
 ```

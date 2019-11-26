@@ -2,12 +2,14 @@
 
 The Nim Widgets are a collection of helpful UI components to interact with the [Nimiq blockchain](https://nimiq.com). The goal is to provide the lowest barrier of entry for people to use Nimiq on their website.
 
+> DO NOT USE IN PRODUCTION YET. THIS IS STILL IN PRE-RELEASE STATUS.
+
 ## Roadmap
 
 This is the list of components that are part of the nim-widgets. Feel free to suggest any new component in a Github issue.
 
 - [x] nim-checkout: accept payment with nimiq
-- [ ] nim-donate: accept donation with nimiq
+- [x] nim-donate: accept donation with nimiq
 
 ## Usage
 
