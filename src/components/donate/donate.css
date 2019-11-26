@@ -28,18 +28,25 @@
   --nimiq-red-bg-darkened: radial-gradient(ellipse at bottom right, #bf2d46, var(--nimiq-red-darkened));
 }
 
+.donate {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+    'Helvetica Neue', sans-serif;
+}
+
 button {
-  border-radius: 100px;
+  font-size: 16px;
   border: 0 none;
+  background: none;
+  cursor: pointer;
+}
+
+.nim-button {
+  border-radius: 100px;
   padding: 12px 20px;
   margin: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-size: 16px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
-    'Helvetica Neue', sans-serif;
-  cursor: pointer;
   position: relative;
   box-shadow: none;
   transition: all 300ms cubic-bezier(0.25, 0, 0, 1);
@@ -65,12 +72,12 @@ button:focus:not([disabled]):after {
   opacity: 1;
 }
 
-button:hover {
+.nim-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 0.6rem 1rem rgba(0, 0, 0, 0.1);
 }
 
-button[disabled] {
+.nim-button[disabled] {
   background: var(--nimiq-gray) !important;
   box-shadow: none !important;
   transform: none !important;
@@ -79,7 +86,7 @@ button[disabled] {
   opacity: 0.4;
 }
 
-button[disabled] > nim-icon {
+.nim-button[disabled] > nim-icon {
   color: var(--nimiq-blue);
 }
 
@@ -192,4 +199,240 @@ button[disabled] > nim-icon {
 
 .nim-theme-red > nim-icon {
   color: #ffffff;
+}
+
+/* Overlay styles */
+.overlay {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(31, 35, 72, 0.8);
+  align-items: center;
+  justify-content: center;
+  z-index: -1;
+}
+
+.overlay.is-open {
+  width: 100%;
+  height: 100%;
+  z-index: 500;
+}
+
+.dialog {
+  position: relative;
+  max-width: 320px;
+  width: 90%;
+  color: var(--nimiq-blue);
+  background-color: #ffffff;
+  box-shadow: 0 0.5rem 3.5rem rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  transform: translateY(24px);
+  opacity: 0;
+  transition: transform 400ms cubic-bezier(0.25, 0, 0, 1), opacity 400ms cubic-bezier(0.25, 0, 0, 1);
+}
+
+.overlay.is-open > .dialog {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.flash {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: var(--nimiq-blue-bg);
+  color: #ffffff;
+  border-radius: 4px;
+  margin: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 200;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.flash.show {
+  opacity: 1;
+  pointer-events: all;
+  transition: opacity 300ms cubic-bezier(0.25, 0, 0, 1);
+}
+
+.flash.error {
+  background-image: var(--nimiq-red-bg);
+}
+
+.flash.success {
+  background-image: var(--nimiq-green-bg);
+}
+
+.flash p {
+  font-size: 24px;
+  text-align: center;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.flash.show p {
+  padding: 24px;
+  opacity: 1;
+  transform: translateY(0px);
+  transition: opacity 300ms cubic-bezier(0.25, 0, 0, 1), transform 300ms 100ms cubic-bezier(0.25, 0, 0, 1);
+}
+
+.dialog h2 {
+  text-align: center;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 600;
+  padding: 32px;
+  margin: 0;
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  margin: 12px;
+  padding: 0;
+  color: var(--nimiq-blue);
+  opacity: 0.5;
+}
+
+.close:hover {
+  opacity: 1;
+}
+
+.close nim-icon {
+  display: inline;
+}
+
+.recipient {
+  display: flex;
+  margin-left: 24px;
+  margin-right: 24px;
+  padding-bottom: 24px;
+  border-bottom: solid 1px var(--nimiq-light-gray);
+}
+
+.recipient .identicon {
+  width: 72px;
+  height: 72px;
+  margin-right: 16px;
+}
+
+.recipient .identicon img {
+  width: 100%;
+  height: 100%;
+}
+
+.recipient .address {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  color: var(--nimiq-blue);
+  opacity: 0.5;
+  letter-spacing: 0.02em;
+}
+
+.recipient .address > .chunk {
+  display: block;
+  width: 33.3%;
+}
+
+.confirm {
+  margin-top: 16px;
+  padding: 0 24px 24px;
+}
+
+.confirm button {
+  display: block;
+  padding: 16px;
+  width: 100%;
+}
+
+.amount {
+  margin-top: 24px;
+  font-size: 24px;
+  position: relative;
+  margin-left: 24px;
+  margin-right: 24px;
+  box-sizing: border-box;
+}
+
+.amount input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 12px;
+  border: solid 2px rgba(31, 35, 72, 0.1);
+  color: var(--nimiq-blue);
+  background: 0 0;
+  border-radius: 8px;
+  outline: 0;
+  transition: color 0.2s ease, border 0.2s ease;
+  background-clip: padding-box;
+}
+
+.amount input:focus {
+  border-color: rgba(5, 130, 202, 0.2);
+}
+
+.amount .ticker {
+  display: block;
+  position: absolute;
+  right: 12px;
+  bottom: 20px;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  opacity: 0.4;
+  transition: opacity 0.2s ease-out;
+  color: var(--nimiq-light-blue);
+}
+
+.message {
+  margin-top: 24px;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.message input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 12px 0;
+  border: 0 none;
+  border-bottom: solid 2px rgba(31, 35, 72, 0);
+  color: var(--nimiq-blue);
+  background: 0 0;
+  outline: 0;
+  transition: color 0.2s ease, border 0.2s ease;
+  background-clip: padding-box;
+  text-align: center;
+}
+
+.message input:hover {
+  border-color: rgba(31, 35, 72, 0.1);
+}
+
+.message input:focus {
+  border-color: rgba(5, 130, 202, 0.2);
 }

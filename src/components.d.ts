@@ -7,7 +7,11 @@
 
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
-
+import {
+  Network,
+  SignedTransaction,
+  Theme,
+} from './utils/common';
 
 export namespace Components {
   interface NimCheckout {
@@ -30,19 +34,56 @@ export namespace Components {
     /**
     * The network you want to use. Can be 'main' or 'test'.
     */
-    'network': 'main' | 'test';
+    'network': Network;
     /**
     * The human-readable address of the recipient (your shop/app).
     */
     'recipient': string;
     /**
+    * The text to display on the button. Default: "Pay with NIM"
+    */
+    'text': string;
+    /**
     * The theme of the button. Use light when using against dark background.
     */
-    'theme': 'dark' | 'light';
+    'theme': Theme;
     /**
     * Value of the transaction, in Luna. 1 NIM = 100000 Luna.
     */
     'value': number;
+  }
+  interface NimDonate {
+    /**
+    * Transaction fee in luna. Default: 0
+    */
+    'fee': number;
+    /**
+    * An image URL. Must be on the same origin as the request is sent from. Should be square and at least 146x146 px.
+    */
+    'logoUrl': string;
+    /**
+    * The network you want to use. Can be 'main' or 'test'.
+    */
+    'network': Network;
+    /**
+    * The human-readable address of the recipient (your shop/app).
+    */
+    'recipient': string;
+    /**
+    * The text to display on the button. Default: "Donate NIM"
+    */
+    'text': string;
+    /**
+    * The text to display once payment is done. Default: "Thank you for the donation!"
+    */
+    'thankyou': string;
+    /**
+    * The theme of the button. Use light when using against dark background.
+    */
+    'theme': Theme;
+  }
+  interface NimIcon {
+    'name': string;
   }
 }
 
@@ -54,8 +95,22 @@ declare global {
     prototype: HTMLNimCheckoutElement;
     new (): HTMLNimCheckoutElement;
   };
+
+  interface HTMLNimDonateElement extends Components.NimDonate, HTMLStencilElement {}
+  const HTMLNimDonateElement: {
+    prototype: HTMLNimDonateElement;
+    new (): HTMLNimDonateElement;
+  };
+
+  interface HTMLNimIconElement extends Components.NimIcon, HTMLStencilElement {}
+  const HTMLNimIconElement: {
+    prototype: HTMLNimIconElement;
+    new (): HTMLNimIconElement;
+  };
   interface HTMLElementTagNameMap {
     'nim-checkout': HTMLNimCheckoutElement;
+    'nim-donate': HTMLNimDonateElement;
+    'nim-icon': HTMLNimIconElement;
   }
 }
 
@@ -80,7 +135,7 @@ declare namespace LocalJSX {
     /**
     * The network you want to use. Can be 'main' or 'test'.
     */
-    'network'?: 'main' | 'test';
+    'network'?: Network;
     /**
     * Emitted when an error happened during checkout or it is canceled
     */
@@ -88,23 +143,62 @@ declare namespace LocalJSX {
     /**
     * Emitted when checkout is successful
     */
-    'onNimCheckoutSuccess'?: (event: CustomEvent<any>) => void;
+    'onNimCheckoutSuccess'?: (event: CustomEvent<SignedTransaction>) => void;
     /**
     * The human-readable address of the recipient (your shop/app).
     */
     'recipient'?: string;
     /**
+    * The text to display on the button. Default: "Pay with NIM"
+    */
+    'text'?: string;
+    /**
     * The theme of the button. Use light when using against dark background.
     */
-    'theme'?: 'dark' | 'light';
+    'theme'?: Theme;
     /**
     * Value of the transaction, in Luna. 1 NIM = 100000 Luna.
     */
     'value'?: number;
   }
+  interface NimDonate {
+    /**
+    * Transaction fee in luna. Default: 0
+    */
+    'fee'?: number;
+    /**
+    * An image URL. Must be on the same origin as the request is sent from. Should be square and at least 146x146 px.
+    */
+    'logoUrl'?: string;
+    /**
+    * The network you want to use. Can be 'main' or 'test'.
+    */
+    'network'?: Network;
+    /**
+    * The human-readable address of the recipient (your shop/app).
+    */
+    'recipient'?: string;
+    /**
+    * The text to display on the button. Default: "Donate NIM"
+    */
+    'text'?: string;
+    /**
+    * The text to display once payment is done. Default: "Thank you for the donation!"
+    */
+    'thankyou'?: string;
+    /**
+    * The theme of the button. Use light when using against dark background.
+    */
+    'theme'?: Theme;
+  }
+  interface NimIcon {
+    'name'?: string;
+  }
 
   interface IntrinsicElements {
     'nim-checkout': NimCheckout;
+    'nim-donate': NimDonate;
+    'nim-icon': NimIcon;
   }
 }
 
@@ -115,6 +209,8 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       'nim-checkout': LocalJSX.NimCheckout & JSXBase.HTMLAttributes<HTMLNimCheckoutElement>;
+      'nim-donate': LocalJSX.NimDonate & JSXBase.HTMLAttributes<HTMLNimDonateElement>;
+      'nim-icon': LocalJSX.NimIcon & JSXBase.HTMLAttributes<HTMLNimIconElement>;
     }
   }
 }
