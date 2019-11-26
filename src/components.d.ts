@@ -74,6 +74,10 @@ export namespace Components {
     */
     'text': string;
     /**
+    * The text to display once payment is done. Default: "Thank you for the donation!"
+    */
+    'thankyou': string;
+    /**
     * The theme of the button. Use light when using against dark background.
     */
     'theme': Theme;
@@ -178,6 +182,10 @@ declare namespace LocalJSX {
     * The text to display on the button. Default: "Donate NIM"
     */
     'text'?: string;
+    /**
+    * The text to display once payment is done. Default: "Thank you for the donation!"
+    */
+    'thankyou'?: string;
     /**
     * The theme of the button. Use light when using against dark background.
     */

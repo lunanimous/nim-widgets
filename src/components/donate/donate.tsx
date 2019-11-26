@@ -66,6 +66,11 @@ export class Donate {
    */
   @Prop() text: string = 'Donate NIM';
 
+  /**
+   * The text to display once payment is done. Default: "Thank you for the donation!"
+   */
+  @Prop() thankyou: string = 'Thank you for the donation!';
+
   componentWillLoad() {
     Iqons.svgPath = getAssetPath('./identicons/iqons.min.svg');
 
@@ -124,7 +129,7 @@ export class Donate {
       setTimeout(() => {
         this.status = Status.Idle;
         this.close();
-      }, 3000);
+      }, 2000);
     } catch (error) {
       this.status = Status.Error;
       setTimeout(() => {
@@ -213,7 +218,7 @@ export class Donate {
                 show: this.status === Status.Success,
               }}
             >
-              <p>Thank you !</p>
+              <p>{this.thankyou}</p>
             </div>
             <div
               class={{
