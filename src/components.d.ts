@@ -82,9 +82,6 @@ export namespace Components {
     */
     'theme': Theme;
   }
-  interface NimIcon {
-    'name': string;
-  }
 }
 
 declare global {
@@ -101,16 +98,9 @@ declare global {
     prototype: HTMLNimDonateElement;
     new (): HTMLNimDonateElement;
   };
-
-  interface HTMLNimIconElement extends Components.NimIcon, HTMLStencilElement {}
-  const HTMLNimIconElement: {
-    prototype: HTMLNimIconElement;
-    new (): HTMLNimIconElement;
-  };
   interface HTMLElementTagNameMap {
     'nim-checkout': HTMLNimCheckoutElement;
     'nim-donate': HTMLNimDonateElement;
-    'nim-icon': HTMLNimIconElement;
   }
 }
 
@@ -191,14 +181,10 @@ declare namespace LocalJSX {
     */
     'theme'?: Theme;
   }
-  interface NimIcon {
-    'name'?: string;
-  }
 
   interface IntrinsicElements {
     'nim-checkout': NimCheckout;
     'nim-donate': NimDonate;
-    'nim-icon': NimIcon;
   }
 }
 
@@ -210,7 +196,6 @@ declare module "@stencil/core" {
     interface IntrinsicElements {
       'nim-checkout': LocalJSX.NimCheckout & JSXBase.HTMLAttributes<HTMLNimCheckoutElement>;
       'nim-donate': LocalJSX.NimDonate & JSXBase.HTMLAttributes<HTMLNimDonateElement>;
-      'nim-icon': LocalJSX.NimIcon & JSXBase.HTMLAttributes<HTMLNimIconElement>;
     }
   }
 }

@@ -18,19 +18,6 @@
 | `theme`     | `theme`     | The theme of the button. Use light when using against dark background.                                          | `"blue" \| "gold" \| "green" \| "light-blue" \| "neutral" \| "orange" \| "red"` | `'neutral'`                     |
 
 
-## Dependencies
-
-### Depends on
-
-- [nim-icon](../icon)
-
-### Graph
-```mermaid
-graph TD;
-  nim-donate --> nim-icon
-  style nim-donate fill:#f9f,stroke:#333,stroke-width:4px
-```
-
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

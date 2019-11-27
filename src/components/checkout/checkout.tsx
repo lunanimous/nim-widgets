@@ -1,6 +1,7 @@
 import { Component, h, Prop, Event, EventEmitter, State } from '@stencil/core';
 import HubApi from '@nimiq/hub-api';
 import { Theme, Network, HubUrl, CheckoutOptions, SignedTransaction } from '../../utils/common';
+import { Hexagon } from '../../utils/icons';
 
 @Component({
   tag: 'nim-checkout',
@@ -101,7 +102,7 @@ export class Checkout {
   render() {
     return (
       <button class={'nim-theme-' + this.theme} disabled={this.inProgress} type="button" onClick={_ => this.checkout()}>
-        <nim-icon class="nim-logo" name="hexagon"></nim-icon>
+        <Hexagon class="nim-icon nim-logo" />
         <div>{this.inProgress ? <span>In progress...</span> : <span>{this.text}</span>}</div>
       </button>
     );

@@ -79,7 +79,7 @@ button[disabled] {
   opacity: 0.4;
 }
 
-button[disabled] > nim-icon {
+button[disabled] > .nim-icon {
   color: var(--nimiq-blue);
 }
 
@@ -100,7 +100,7 @@ button[disabled] > nim-icon {
   box-shadow: none;
 }
 
-.nim-theme-neutral > nim-icon {
+.nim-theme-neutral > .nim-icon {
   color: #e9b213;
 }
 
@@ -115,7 +115,7 @@ button[disabled] > nim-icon {
   background-image: var(--nimiq-blue-bg-darkened);
 }
 
-.nim-theme-blue > nim-icon {
+.nim-theme-blue > .nim-icon {
   color: var(--nimiq-gold);
 }
 
@@ -130,7 +130,7 @@ button[disabled] > nim-icon {
   background-image: var(--nimiq-gold-bg-darkened);
 }
 
-.nim-theme-gold > nim-icon {
+.nim-theme-gold > .nim-icon {
   color: #ffffff;
 }
 
@@ -145,7 +145,7 @@ button[disabled] > nim-icon {
   background-image: var(--nimiq-light-blue-bg-darkened);
 }
 
-.nim-theme-light-blue > nim-icon {
+.nim-theme-light-blue > .nim-icon {
   color: #ffffff;
 }
 
@@ -160,7 +160,7 @@ button[disabled] > nim-icon {
   background-image: var(--nimiq-green-bg-darkened);
 }
 
-.nim-theme-green > nim-icon {
+.nim-theme-green > .nim-icon {
   color: #ffffff;
 }
 
@@ -175,7 +175,7 @@ button[disabled] > nim-icon {
   background-image: var(--nimiq-orange-bg-darkened);
 }
 
-.nim-theme-orange > nim-icon {
+.nim-theme-orange > .nim-icon {
   color: #ffffff;
 }
 
@@ -190,6 +190,6 @@ button[disabled] > nim-icon {
   background-image: var(--nimiq-red-bg-darkened);
 }
 
-.nim-theme-red > nim-icon {
+.nim-theme-red > .nim-icon {
   color: #ffffff;
 }

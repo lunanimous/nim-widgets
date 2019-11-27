@@ -2,6 +2,7 @@ import { Component, h, State, Prop, getAssetPath, Watch } from '@stencil/core';
 import { Theme, Network, HubUrl, CheckoutOptions } from '../../utils/common';
 import Iqons from '@nimiq/iqons/dist/iqons.min.js';
 import HubApi from '@nimiq/hub-api';
+import { Hexagon, Close } from '../../utils/icons';
 
 enum Status {
   Idle = 0,
@@ -159,7 +160,7 @@ export class Donate {
           type="button"
           onClick={_ => this.open()}
         >
-          <nim-icon class="nim-logo" name="hexagon"></nim-icon>
+          <Hexagon class="nim-icon nim-logo" />
           <div>
             <span>{this.text}</span>
           </div>
@@ -167,7 +168,7 @@ export class Donate {
         <div class={{ overlay: true, 'is-open': this.isOpen }}>
           <div class="dialog">
             <button onClick={_ => this.close()} type="button" class="close">
-              <nim-icon name="close"></nim-icon>
+              <Close class="nim-icon" />
             </button>
 
             <form onSubmit={e => this.donate(e)}>

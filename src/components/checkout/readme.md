@@ -28,19 +28,6 @@
 | `nimCheckoutSuccess` | Emitted when checkout is successful                              | `CustomEvent<SignedTransaction>` |
 
 
-## Dependencies
-
-### Depends on
-
-- [nim-icon](../icon)
-
-### Graph
-```mermaid
-graph TD;
-  nim-checkout --> nim-icon
-  style nim-checkout fill:#f9f,stroke:#333,stroke-width:4px
-```
-
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*
