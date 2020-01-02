@@ -74,7 +74,7 @@ button:focus:not([disabled]):after {
 
 .nim-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0.6rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.12);
 }
 
 .nim-button[disabled] {
@@ -230,7 +230,7 @@ button:focus:not([disabled]):after {
   width: 90%;
   color: var(--nimiq-blue);
   background-color: #ffffff;
-  box-shadow: 0 0.5rem 3.5rem rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0.5rem 3.5rem rgba(0, 0, 0, 0.3);
   border-radius: 8px;
   transform: translateY(24px);
   opacity: 0;
