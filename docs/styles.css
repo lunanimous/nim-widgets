@@ -1,0 +1,102 @@
+.configurator {
+  border-radius: 12px;
+  background-color: #f4f4f4;
+  padding: 16px;
+}
+
+.configurator h3 {
+  margin: 0;
+}
+
+.configurator label {
+  display: block;
+}
+
+.configurator section {
+  margin-top: 12px;
+}
+
+button {
+  position: relative;
+}
+
+button:after {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: -5px;
+  right: -5px;
+  bottom: -5px;
+  border: 2px solid rgba(5, 130, 202, 0.5); /* Based on Nimiq Light Blue */
+  border-radius: 500px;
+  opacity: 0;
+}
+
+button:focus {
+  outline: none;
+}
+
+button.focused:after {
+  opacity: 1;
+}
+
+.colors {
+  margin-top: 8px;
+}
+
+.colors button {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 0 none;
+  color: transparent;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+.colors button.neutral {
+  background-color: #e2e8f0;
+}
+
+.colors button.blue {
+  background-color: #1f2348;
+}
+
+.colors button.gold {
+  background-color: #e9b213;
+}
+
+.colors button.light-blue {
+  background-color: #0582ca;
+}
+
+.colors button.green {
+  background-color: #21bca5;
+}
+
+.colors button.orange {
+  background-color: #fc8702;
+}
+
+.colors button.red {
+  background-color: #d94432;
+}
+
+.columns {
+  display: flex;
+}
+
+.columns > .col {
+  flex: 1;
+}
+
+.preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview label {
+  text-align: center;
+  margin-bottom: 12px;
+}

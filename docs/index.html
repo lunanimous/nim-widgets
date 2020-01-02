@@ -4,11 +4,12 @@
 <head>
   <meta charset="UTF-8" />
   <title>Nim Widgets</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="description" content="Nim Widgets" />
-  <meta name="viewport"
-    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
-  <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://unpkg.com/docute@4/dist/docute.css">
+  <link rel="stylesheet" href="./styles.css" />
 
   <script type="module"
     src="https://cdn.jsdelivr.net/npm/nim-widgets@0.2.1/dist/nim-widgets/nim-widgets.esm.js"></script>
@@ -16,15 +17,84 @@
 </head>
 
 <body>
-  <div id="app"></div>
+  <div id="docs"></div>
+  <script src="https://unpkg.com/docute@4/dist/docute.js"></script>
   <script>
-    window.$docsify = {
-      name: 'nim-widgets',
-      repo: 'https://github.com/lunanimous/nim-widgets',
-    };
+    new Docute({
+      target: '#docs'
+    })
+
+    Vue.component('configurator', {
+      data: function () {
+        return {
+          colors: ['neutral', 'blue', 'gold', 'light-blue', 'green', 'orange', 'red'],
+          type: 'donate',
+          activeColor: 'neutral',
+          activeRecipient: 'NQ65 HRRC 7TSB XSD8 GQBD 63JM HDNK 855V T13T',
+          code: ''
+        }
+      },
+      created: function () {
+        this.generateCode();
+      },
+      methods: {
+        updateColor: function (color) {
+          this.activeColor = color;
+          this.generateCode();
+        },
+        updateRecipient: function (event) {
+          this.activeRecipient = event.target.value;
+          this.generateCode();
+        },
+        generateCode: function () {
+          console.log(this.activeRecipient, this.activeColor);
+          this.code = `<nim-donate theme="${this.activeColor}" recipient="${this.activeRecipient}"></nim-donate>`;
+        }
+      },
+      template: `
+        <div class="configurator">
+          <h3>Get a "donate" button</h3>
+          <div class="columns">
+            <form class="col">
+              <section>
+              <label for="color">Select the color</label>
+              <div class="colors">
+                <button
+                  type="button"
+                  v-for="color in colors"
+                  :class="[color, color === activeColor ? 'focused' : '']"
+                  @click="updateColor(color)"
+                ></button>
+              </div>
+              </section>
+
+              <section>
+                <label for="color" type="address">Enter NIM address</label>
+                <input v-on:input="updateRecipient" :value="activeRecipient" type="text" id="address" name="address" />
+              </section>
+            </form>
+
+            <div class="col preview">
+              <div>
+                <label>Preview</label>
+                <nim-donate :theme="activeColor" :recipient="activeRecipient"></nim-donate>
+              </div>
+            </div>
+          </div>
+
+          <section>
+            <label>Get the code</label>
+            <div class="pre-wrapper">
+              <pre>
+                <code class="language-html"><span class="token tag">{{code}}</span></code>
+              </pre>
+            </div>
+          </section>
+
+        </div>
+      `
+    })
   </script>
-  <script src="//unpkg.com/vue/dist/vue.min.js"></script>
-  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
 </body>
 
 </html>
