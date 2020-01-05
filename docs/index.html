@@ -21,7 +21,43 @@
   <script src="https://unpkg.com/docute@4/dist/docute.js"></script>
   <script>
     new Docute({
-      target: '#docs'
+      target: '#docs',
+      layout: 'narrow',
+      nav: [
+        {
+          title: 'Github',
+          link: 'https://github.com/lunanimous/nim-widgets',
+          openInNewTab: true,
+        }
+      ],
+      sidebar: [
+        {
+          title: 'Introduction',
+          link: '/',
+        },
+        {
+          title: 'Installation',
+          link: '/installation',
+        },
+        {
+          title: 'Customize',
+          link: '/customize'
+        },
+        {
+          title: 'Components',
+          collapsable: false,
+          children: [
+            {
+              title: 'nim-donate',
+              link: '/donate',
+            },
+            {
+              title: 'nim-checkout',
+              link: '/checkout'
+            }
+          ]
+        },
+      ]
     })
 
     Vue.component('configurator', {
@@ -48,47 +84,42 @@
         },
         generateCode: function () {
           console.log(this.activeRecipient, this.activeColor);
-          this.code = `<nim-donate theme="${this.activeColor}" recipient="${this.activeRecipient}"></nim-donate>`;
+          this.code = `<nim-donate \n  theme="${this.activeColor}"\n  recipient="${this.activeRecipient}"\n></nim-donate>`;
         }
       },
       template: `
         <div class="configurator">
           <h3>Get a "donate" button</h3>
-          <div class="columns">
-            <form class="col">
-              <section>
-              <label for="color">Select the color</label>
-              <div class="colors">
-                <button
-                  type="button"
-                  v-for="color in colors"
-                  :class="[color, color === activeColor ? 'focused' : '']"
-                  @click="updateColor(color)"
-                ></button>
-              </div>
-              </section>
-
-              <section>
-                <label for="color" type="address">Enter NIM address</label>
-                <input v-on:input="updateRecipient" :value="activeRecipient" type="text" id="address" name="address" />
-              </section>
-            </form>
-
-            <div class="col preview">
-              <div>
-                <label>Preview</label>
-                <nim-donate :theme="activeColor" :recipient="activeRecipient"></nim-donate>
-              </div>
+          <form>
+            <section>
+            <label for="color">Select the color</label>
+            <div class="colors">
+              <button
+                type="button"
+                v-for="color in colors"
+                :class="[color, color === activeColor ? 'focused' : '']"
+                @click="updateColor(color)"
+              ></button>
             </div>
-          </div>
+            </section>
 
-          <section>
+            <section>
+              <label for="color" type="address">Enter NIM address</label>
+              <input v-on:input="updateRecipient" :value="activeRecipient" type="text" id="address" name="address" />
+            </section>
+          </form>
+
+          <section class="preview">
+            <label>Preview</label>
+            <nim-donate :theme="activeColor" :recipient="activeRecipient"></nim-donate>
+          </section>
+
+          <section class="code">
             <label>Get the code</label>
-            <div class="pre-wrapper">
-              <pre>
-                <code class="language-html"><span class="token tag">{{code}}</span></code>
-              </pre>
+            <div class="code-wrapper">
+              <code>{{code}}</code>
             </div>
+
           </section>
 
         </div>
