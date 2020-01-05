@@ -1,3 +1,0 @@
-# Configurator
-
-<configurator></configurator>

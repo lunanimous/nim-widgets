@@ -36,10 +36,6 @@
           link: '/',
         },
         {
-          title: 'Installation',
-          link: '/installation',
-        },
-        {
           title: 'Customize',
           link: '/customize'
         },
@@ -60,7 +56,7 @@
       ]
     })
 
-    Vue.component('configurator', {
+    Vue.component('donate-configurator', {
       data: function () {
         return {
           colors: ['neutral', 'blue', 'gold', 'light-blue', 'green', 'orange', 'red'],
@@ -83,13 +79,11 @@
           this.generateCode();
         },
         generateCode: function () {
-          console.log(this.activeRecipient, this.activeColor);
           this.code = `<nim-donate \n  theme="${this.activeColor}"\n  recipient="${this.activeRecipient}"\n></nim-donate>`;
         }
       },
       template: `
         <div class="configurator">
-          <h3>Get a "donate" button</h3>
           <form>
             <section>
             <label for="color">Select the color</label>
@@ -109,9 +103,11 @@
             </section>
           </form>
 
-          <section class="preview">
-            <label>Preview</label>
-            <nim-donate :theme="activeColor" :recipient="activeRecipient"></nim-donate>
+          <section>
+            <h3>Preview</h3>
+            <div class="preview">
+              <nim-donate :theme="activeColor" :recipient="activeRecipient"></nim-donate>
+            </div>
           </section>
 
           <section class="code">
@@ -124,7 +120,73 @@
 
         </div>
       `
-    })
+    });
+
+    Vue.component('checkout-configurator', {
+      data: function () {
+        return {
+          colors: ['neutral', 'blue', 'gold', 'light-blue', 'green', 'orange', 'red'],
+          type: 'donate',
+          activeColor: 'neutral',
+          activeRecipient: 'NQ65 HRRC 7TSB XSD8 GQBD 63JM HDNK 855V T13T',
+          code: ''
+        }
+      },
+      created: function () {
+        this.generateCode();
+      },
+      methods: {
+        updateColor: function (color) {
+          this.activeColor = color;
+          this.generateCode();
+        },
+        updateRecipient: function (event) {
+          this.activeRecipient = event.target.value;
+          this.generateCode();
+        },
+        generateCode: function () {
+          this.code = `<nim-donate \n  theme="${this.activeColor}"\n  recipient="${this.activeRecipient}"\n></nim-donate>`;
+        }
+      },
+      template: `
+        <div class="configurator">
+          <form>
+            <section>
+            <label for="color">Select the color</label>
+            <div class="colors">
+              <button
+                type="button"
+                v-for="color in colors"
+                :class="[color, color === activeColor ? 'focused' : '']"
+                @click="updateColor(color)"
+              ></button>
+            </div>
+            </section>
+
+            <section>
+              <label for="color" type="address">Enter NIM address</label>
+              <input v-on:input="updateRecipient" :value="activeRecipient" type="text" id="address" name="address" />
+            </section>
+          </form>
+
+          <section>
+            <h3>Preview</h3>
+            <div class="preview">
+              <nim-donate :theme="activeColor" :recipient="activeRecipient"></nim-donate>
+            </div>
+          </section>
+
+          <section class="code">
+            <label>Get the code</label>
+            <div class="code-wrapper">
+              <code>{{code}}</code>
+            </div>
+
+          </section>
+
+        </div>
+      `
+    });
   </script>
 </body>
 

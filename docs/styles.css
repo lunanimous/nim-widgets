@@ -1,19 +1,35 @@
 .configurator {
+  padding: 16px 0;
   border-radius: 12px;
-  /* background-color: #f4f4f4; */
-  /* padding: 16px; */
-}
-
-.configurator h3 {
-  margin: 0;
-}
-
-.configurator label {
-  display: block;
+  background-color: #f7fafc;
 }
 
 .configurator section {
   margin-top: 12px;
+  padding: 0 16px;
+}
+
+.configurator section:first-child {
+  margin-top: 0;
+}
+
+.configurator section > h3,
+.configurator section > label {
+  display: block;
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.configurator input[type='text'] {
+  height: 36px;
+  line-height: 36px;
+  width: 100%;
+  max-width: 420px;
+  border: solid 2px #e2e8f0;
+  padding: 0 8px;
 }
 
 button {
@@ -41,7 +57,8 @@ button.focused:after {
 }
 
 .colors {
-  margin-top: 8px;
+  margin-top: 12px;
+  margin-left: 4px;
 }
 
 .colors button {
@@ -82,8 +99,10 @@ button.focused:after {
   background-color: #d94432;
 }
 
-.preview label {
-  margin-bottom: 12px;
+.preview {
+  border-radius: 4px;
+  padding: 12px 8px;
+  background: #ffffff;
 }
 
 .code-wrapper {
