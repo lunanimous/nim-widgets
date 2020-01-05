@@ -60,26 +60,23 @@
       data: function () {
         return {
           colors: ['neutral', 'blue', 'gold', 'light-blue', 'green', 'orange', 'red'],
-          type: 'donate',
-          activeColor: 'neutral',
-          activeRecipient: 'NQ65 HRRC 7TSB XSD8 GQBD 63JM HDNK 855V T13T',
-          code: ''
+          form: {
+            color: 'neutral',
+            recipient: ''
+          },
         }
       },
-      created: function () {
-        this.generateCode();
+      computed: {
+        code: function () {
+          return `<nim-donate \n  theme="${this.form.color}"\n  recipient="${this.form.recipient}"\n></nim-donate>`;
+        }
       },
       methods: {
         updateColor: function (color) {
-          this.activeColor = color;
-          this.generateCode();
+          this.form.color = color;
         },
         updateRecipient: function (event) {
-          this.activeRecipient = event.target.value;
-          this.generateCode();
-        },
-        generateCode: function () {
-          this.code = `<nim-donate \n  theme="${this.activeColor}"\n  recipient="${this.activeRecipient}"\n></nim-donate>`;
+          this.form.recipient = event.target.value;
         }
       },
       template: `
@@ -91,22 +88,22 @@
               <button
                 type="button"
                 v-for="color in colors"
-                :class="[color, color === activeColor ? 'focused' : '']"
+                :class="[color, color === form.color ? 'focused' : '']"
                 @click="updateColor(color)"
               ></button>
             </div>
             </section>
 
             <section>
-              <label for="color" type="address">Enter NIM address</label>
-              <input v-on:input="updateRecipient" :value="activeRecipient" type="text" id="address" name="address" />
+              <label for="address" type="address">Enter NIM address</label>
+              <input v-on:input="updateRecipient" :value="form.recipient" type="text" id="address" name="address" placeholder="NQ..."/>
             </section>
           </form>
 
           <section>
             <h3>Preview</h3>
             <div class="preview">
-              <nim-donate :theme="activeColor" :recipient="activeRecipient"></nim-donate>
+              <nim-donate :theme="form.color" :recipient="form.recipient"></nim-donate>
             </div>
           </section>
 
@@ -126,26 +123,31 @@
       data: function () {
         return {
           colors: ['neutral', 'blue', 'gold', 'light-blue', 'green', 'orange', 'red'],
-          type: 'donate',
-          activeColor: 'neutral',
-          activeRecipient: 'NQ65 HRRC 7TSB XSD8 GQBD 63JM HDNK 855V T13T',
-          code: ''
+          form: {
+            color: 'neutral',
+            recipient: '',
+            amount: 0,
+            app: ''
+          },
         }
       },
-      created: function () {
-        this.generateCode();
+      computed: {
+        code: function () {
+          return `<nim-checkout \n  theme="${this.form.color}"\n  recipient="${this.form.recipient}"\n  app="${this.form.app}"\n  amount="${this.form.amount}"\n></nim-checkout>`;
+        }
       },
       methods: {
         updateColor: function (color) {
-          this.activeColor = color;
-          this.generateCode();
+          this.form.color = color;
         },
         updateRecipient: function (event) {
-          this.activeRecipient = event.target.value;
-          this.generateCode();
+          this.form.recipient = event.target.value;
         },
-        generateCode: function () {
-          this.code = `<nim-donate \n  theme="${this.activeColor}"\n  recipient="${this.activeRecipient}"\n></nim-donate>`;
+        updateAmount: function (event) {
+          this.form.amount = event.target.value;
+        },
+        updateAppName: function (event) {
+          this.form.app = event.target.value;
         }
       },
       template: `
@@ -157,22 +159,32 @@
               <button
                 type="button"
                 v-for="color in colors"
-                :class="[color, color === activeColor ? 'focused' : '']"
+                :class="[color, color === form.color ? 'focused' : '']"
                 @click="updateColor(color)"
               ></button>
             </div>
             </section>
 
             <section>
-              <label for="color" type="address">Enter NIM address</label>
-              <input v-on:input="updateRecipient" :value="activeRecipient" type="text" id="address" name="address" />
+              <label for="app">Enter app or store name</label>
+              <input v-on:input="updateAppName" :value="form.app" type="text" id="app" name="app" />
+            </section>
+
+            <section>
+              <label for="address">Enter NIM address</label>
+              <input v-on:input="updateRecipient" :value="form.recipient" type="text" id="address" name="address" placeholder="NQ..."/>
+            </section>
+
+            <section>
+              <label for="amount">Enter amount in Luna (1 NIM = 100000 Luna)</label>
+              <input v-on:input="updateAmount" :value="form.amount" type="number" id="amount" name="amount"/>
             </section>
           </form>
 
           <section>
             <h3>Preview</h3>
             <div class="preview">
-              <nim-donate :theme="activeColor" :recipient="activeRecipient"></nim-donate>
+              <nim-checkout :theme="form.color" :value="form.amount" :recipient="form.recipient" app="Nim Widgets"></nim-checkout>
             </div>
           </section>
 
